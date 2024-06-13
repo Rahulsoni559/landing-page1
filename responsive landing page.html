@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Navigation Menu</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            height: 100%;
+            overflow: hidden;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            background-color: #333;
+            z-index: 1000;
+            transition: background-color 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        nav ul li {
+            float: left;
+        }
+
+        nav ul li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            background-color: #575757;
+            color: #fff;
+        }
+
+        section {
+            padding: 60px 20px;
+            margin-top: 60px; /* To avoid content being hidden behind the fixed nav */
+            display: none;
+            height: calc(100vh - 60px);
+            overflow-y: auto;
+            transition: opacity 0.3s ease;
+            opacity: 0;
+        }
+
+        #home {
+            background: linear-gradient(to right, #ff7e5f, #feb47b);
+            color: white;
+        }
+
+        #services {
+            background: linear-gradient(to right, #00c6ff, #0072ff);
+            color: white;
+        }
+
+        #about {
+            background: linear-gradient(to right, #f7971e, #ffd200);
+            color: white;
+        }
+
+        #contact {
+            background: linear-gradient(to right, #00b09b, #96c93d);
+            color: white;
+        }
+
+        .visible {
+            display: block;
+            opacity: 1;
+        }
+
+        #navbar.scrolled {
+            background-color: #222;
+        }
+
+        #navbar.scrolled ul li a {
+            color: #ddd;
+        }
+
+        #navbar.scrolled ul li a:hover {
+            color: white;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 1.2em;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav id="navbar">
+            <ul>
+                <li><a href="#home" onclick="showSection('home')">Home</a></li>
+                <li><a href="#services" onclick="showSection('services')">Services</a></li>
+                <li><a href="#about" onclick="showSection('about')">About</a></li>
+                <li><a href="#contact" onclick="showSection('contact')">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home">
+        <h1>Home</h1>
+        <p>Welcome to our homepage</p>
+    </section>
+
+    <section id="services">
+        <h1>Services</h1>
+        <p>We offer a wide range of services to meet your needs</p>
+    </section>
+
+    <section id="about">
+        <h1>About Us</h1>
+        <p>Our company has a rich history of delivering top-notch solutions to our clients. Learn more about our mission, values, and the team that makes it all happen.</p>
+    </section>
+
+    <section id="contact">
+        <h1>Contact Us</h1>
+        <p>We'd love to hear from you. Reach out to us for any inquiries, support, or feedback. We're here to help!</p>
+    </section>
+
+    <script>
+        function showSection(sectionId) {
+            // Hide all sections
+            var sections = document.querySelectorAll('section');
+            sections.forEach(function(section) {
+                section.classList.remove('visible');
+            });
+
+            // Show the selected section
+            var sectionToShow = document.getElementById(sectionId);
+            sectionToShow.classList.add('visible');
+        }
+
+        window.addEventListener('scroll', function() {
+            var navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Initially show the home section
+        document.addEventListener('DOMContentLoaded', function() {
+            showSection('home');
+        });
+    </script>
+</body>
+</html>
